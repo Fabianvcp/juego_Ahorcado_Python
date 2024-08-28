@@ -1,12 +1,11 @@
-
-import random
-from lector_palabras import *
-from juego_Ahorcado_Python.ahorcado import *
+from lector_palabras import cargar_palabras
+from ahorcado import mostrar_ahorcado
 import warnings
-warnings.simplefilter(action='ignore', category=FutureWarning)
 import pandas as pd
 import time
-
+import json
+import random
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def mostrar_tablero(palabra, letras_adivinadas):
     return ' '.join([letra if letra in letras_adivinadas else '_' for letra in palabra])
@@ -30,7 +29,7 @@ def registrar_estadisticas(df, palabra, intentos_fallidos, tiempo_total, resulta
 
 def ahorcado():
     try:
-        palabras = cargar_palabras('palabras.json')
+        palabras = cargar_palabras()
     except FileNotFoundError:
         print("Error: El archivo 'palabras.json' no fue encontrado.")
         return
@@ -115,7 +114,6 @@ def ahorcado():
         if jugar_otra_vez == 'no':
             seguir_jugando = False
             print(f"Gracias por jugar. Tu puntaje final es: {puntaje}")
-            exit()
             
 #! Guardar las estadísticas en un archivo CSV
     estadisticas.to_csv('estadisticas_ahorcado.csv', index=False)

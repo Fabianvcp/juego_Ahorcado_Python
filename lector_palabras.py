@@ -1,14 +1,9 @@
 import json
-def cargar_palabras(nombre_archivo):
-    """
-    Carga las palabras desde un archivo JSON.
-
-    Parámetros:
-    nombre_archivo (str): El nombre del archivo JSON que contiene las palabras.
-
-    Retorna:
-    list: Una lista de palabras cargadas desde el archivo JSON.
-    """
-    with open(nombre_archivo, 'r') as archivo:
+import os
+def cargar_palabras():    
+    ruta_directorio = os.path.dirname(os.path.abspath(__file__))
+    ruta_palabras = os.path.join(ruta_directorio, 'palabras.json')
+    
+    with open(ruta_palabras, 'r') as archivo:
         datos = json.load(archivo)
     return datos["palabras"]
